@@ -18,7 +18,7 @@
   <link rel="icon" href="../favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="../apple-touch-icon.png">
   <link rel="preload" href="../assets/archivo-latin-wdth.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../assets/site.css?v=202610171027">
+  <link rel="stylesheet" href="../assets/site.css?v=202610171029">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -59,7 +59,7 @@
           <p>Changes are drafts until you make them live, and every live version is kept.</p>
         </div>
         <figure class="shot">
-          <a href="../assets/slam-line.jpg"><img src="../assets/slam-line.jpg" width="2000" height="1089" alt="The SLAM line designer: the pre-shop scan zone of a conveyor with a photo-eye, a barcode scanner and a no-read pusher, the WMS connection, the scanner's settings, and below it the steps for each device with a timing chart."></a>
+          <a href="../assets/slam-line.jpg" data-lightbox aria-label="Open the line designer screenshot full size"><img src="../assets/slam-line.jpg" width="2000" height="1089" alt="The SLAM line designer: the pre-shop scan zone of a conveyor with a photo-eye, a barcode scanner and a no-read pusher, the WMS connection, the scanner's settings, and below it the steps for each device with a timing chart."></a>
           <figcaption>The line designer. Select it to see it full size.</figcaption>
         </figure>
       </div>
@@ -160,5 +160,25 @@
       <p>Label Factory is made by <a href="https://chicagocoding.com">Chicago Coding Systems</a>. © 2026</p>
     </div>
   </footer>
+  <dialog class="lightbox" id="lightbox" aria-label="Line designer screenshot">
+    <form method="dialog"><button class="lightbox-close" aria-label="Close">&times;</button></form>
+    <img alt="">
+  </dialog>
+  <script>
+    (function () {
+      var box = document.getElementById("lightbox");
+      if (!box || typeof box.showModal !== "function") return;   // old browsers keep the plain link
+      var img = box.querySelector("img");
+      document.querySelectorAll("a[data-lightbox]").forEach(function (a) {
+        a.addEventListener("click", function (e) {
+          e.preventDefault();
+          var src = a.querySelector("img");
+          img.src = a.href; img.alt = src ? src.alt : "";
+          box.showModal();
+        });
+      });
+      box.addEventListener("click", function (e) { if (e.target === box || e.target === img) box.close(); });
+    })();
+  </script>
 </body>
 </html>

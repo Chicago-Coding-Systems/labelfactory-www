@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Label Factory SLAM</title>
+  <meta name="description" content="Label Factory SLAM runs scan, label, apply and manifest lines at your plant: scanners, label printers, verify scanners and I/O on the conveyor, with order data from your WMS or ERP.">
+  <meta name="theme-color" content="#D91A21">
+  <link rel="canonical" href="https://labelfactory.app/slam/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Label Factory">
+  <meta property="og:title" content="Label Factory SLAM">
+  <meta property="og:description" content="Scan, label, apply and manifest on your conveyor lines, run from a server at your plant.">
+  <meta property="og:url" content="https://labelfactory.app/slam/">
+  <meta property="og:image" content="https://labelfactory.app/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="preload" href="../assets/archivo-latin-wdth.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="top">
+    <div class="wrap top-row">
+      <a class="brand" href="../" aria-label="Label Factory home">
+        <img src="../favicon.svg" alt="" width="32" height="32">
+        <span>Label Factory</span>
+      </a>
+      <nav class="top-nav" aria-label="Main">
+        <a href="./" aria-current="page">SLAM</a>
+        <a href="https://app.labelfactory.app/login">Sign in</a>
+        <a class="button" href="https://app.labelfactory.app/signup">Start free</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero slam-hero">
+      <div class="wrap">
+        <h1 class="slam-title">Label Factory SLAM</h1>
+        <p class="slam-expand">Scan, label, apply, manifest.</p>
+        <p class="lead">Run the labeling on your conveyor lines from one place. SLAM reads each box as it passes, looks up its order in your WMS or ERP, prints and applies the right label, checks it, and sends anything wrong down the reject lane.</p>
+        <div class="actions">
+          <a class="button button-lg" href="https://chicagocoding.com">Contact Chicago Coding Systems</a>
+        </div>
+        <p class="fine">SLAM runs on a server at your plant. Nothing on the line needs the internet.</p>
+      </div>
+    </section>
+
+    <section class="band" aria-labelledby="designer-title">
+      <div class="wrap split split-media">
+        <div class="split-text">
+          <h2 id="designer-title">Draw the line the way it's built</h2>
+          <p>Lay out belts, zones and packing tables to scale, then place each scanner, printer, photo-eye and pusher where it sits on the floor. Belt length and speed tell SLAM how long a box takes to get from one device to the next.</p>
+          <p>Below the drawing, the box record lists every field a box picks up on its way: the ID a scanner read, the order from your WMS, the label that was printed. Each column says where its value comes from and which station needs it.</p>
+          <p>Changes are drafts until you make them live, and every live version is kept.</p>
+        </div>
+        <figure class="shot">
+          <img src="../assets/slam-designer.jpg" width="800" height="901" alt="The SLAM line designer: a conveyor drawn to scale with scanners, a labeling cell, I/O modules and a reject lane, above the box record table listing each field's source.">
+          <figcaption>The line designer, with the box record below it.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="band band-alt" aria-labelledby="line-title">
+      <div class="wrap">
+        <h2 id="line-title">What happens to each box</h2>
+        <ol class="steps steps-4">
+          <li>
+            <h3>Scan</h3>
+            <p>A scanner reads the box ID as it passes. A box nobody can read is pushed off to a no-read lane instead of going on unlabeled.</p>
+          </li>
+          <li>
+            <h3>Look up</h3>
+            <p>SLAM fetches the order, packing slip and shipping label data from your WMS or ERP before the box reaches the printer. It keeps a copy, so a slow WMS doesn't stop the line.</p>
+          </li>
+          <li>
+            <h3>Label and apply</h3>
+            <p>The printer at the labeling cell prints that box's label as it arrives. A label is only printed for the box that was just read, never a guess.</p>
+          </li>
+          <li>
+            <h3>Verify and manifest</h3>
+            <p>A verify scanner reads the box and its new label together. A match goes on to shipping and is recorded. A mismatch goes to the reject lane and the exceptions list.</p>
+          </li>
+        </ol>
+        <p class="aside">Every read, lookup, print and verify is kept, so you can trace any box, see the line's throughput and timing, and work through the exceptions.</p>
+      </div>
+    </section>
+
+    <section class="band" aria-labelledby="arch-title">
+      <div class="wrap">
+        <h2 id="arch-title">How it fits together</h2>
+        <p class="section-lead">One SLAM server runs the lines. Agents on PCs along the conveyor talk to the devices. Your business systems stay where they are.</p>
+
+        <div class="arch" role="img" aria-label="Architecture: your WMS, ERP and databases connect to the SLAM server over REST or a database connection. Browsers connect to the SLAM server. The SLAM server connects to agents on line PCs over the plant network. Each agent connects to barcode scanners, label printers, print-and-apply printers, verify scanners, I/O modules for photo-eyes, pushers and stack lights, scales and document printers.">
+          <div class="arch-col arch-sources">
+            <h3 class="arch-head">Your systems</h3>
+            <div class="arch-box">WMS</div>
+            <div class="arch-box">ERP</div>
+            <div class="arch-box">Database</div>
+            <div class="arch-box arch-quiet">Browsers for design and monitoring</div>
+          </div>
+
+          <div class="arch-link"><span>REST API or database</span></div>
+
+          <div class="arch-col arch-core">
+            <h3 class="arch-head">At your plant</h3>
+            <div class="arch-server">
+              <div class="arch-server-name"><img src="../favicon.svg" alt="" width="28" height="28"><span>SLAM server</span></div>
+              <ul>
+                <li>Line designer and dashboards</li>
+                <li>Line runtime: decides each box's label</li>
+                <li>Order data copy and tracking history</li>
+                <li>Label library</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="arch-link"><span>Plant network</span></div>
+
+          <div class="arch-col arch-agents">
+            <h3 class="arch-head">On the line</h3>
+            <div class="arch-agent">
+              <div class="arch-agent-name">Agent on a line PC</div>
+              <ul class="arch-devices">
+                <li>Barcode scanners</li>
+                <li>Print-and-apply printer</li>
+                <li>Verify scanner</li>
+                <li>I/O module: photo-eyes, pushers, stack lights</li>
+              </ul>
+            </div>
+            <div class="arch-agent">
+              <div class="arch-agent-name">Agent at packing</div>
+              <ul class="arch-devices">
+                <li>Label and document printers</li>
+                <li>Scale</li>
+                <li>Hand scanner</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <p class="arch-note">Agents keep timing and safety on the line: they trigger devices, hold events until the server has them, and stop a printer that would miss its box. Decisions about content stay on the server.</p>
+      </div>
+    </section>
+
+    <section class="band band-alt" aria-labelledby="contact-title">
+      <div class="wrap contact">
+        <h2 id="contact-title">Planning a line?</h2>
+        <p class="section-lead">Tell Chicago Coding Systems about your conveyor, your devices and the systems your order data lives in.</p>
+        <a class="button button-lg" href="https://chicagocoding.com">Contact Chicago Coding Systems</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-row">
+      <p>Label Factory is made by <a href="https://chicagocoding.com">Chicago Coding Systems</a>. © 2026</p>
+    </div>
+  </footer>
+</body>
+</html>

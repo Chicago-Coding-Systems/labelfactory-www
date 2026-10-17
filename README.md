@@ -28,10 +28,8 @@ Then open http://localhost:8796.
 ## Publishing
 
 Pages deploys the `main` branch from the repository root. `.nojekyll` turns off
-Jekyll processing. Until labelfactory.app moves here from the app, the site has
-no custom domain, so preview it at
-https://chicago-coding-systems.github.io/labelfactory-www/. At cutover, a
-`CNAME` file containing `labelfactory.app` sets the custom domain. The DNS
-records live in Cloudflare.
+Jekyll processing. The custom domain is `labelfactory.app`, recorded in the
+`CNAME` file; www.labelfactory.app redirects to it. The DNS records live in
+Cloudflare.
 
 App links (Sign in, Start free) point to `https://app.labelfactory.app`.

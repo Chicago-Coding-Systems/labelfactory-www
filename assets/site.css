@@ -255,10 +255,6 @@ h3 { font-size: 19px; font-weight: 750; font-stretch: 110%; line-height: 1.25; }
 .shot img { width: 100%; height: auto; }
 .shot a { display: block; }
 .shot-wide { margin-top: 40px; }
-@media (max-width: 700px) {
-  .shot-wide a { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .shot-wide img { width: 780px; max-width: none; }
-}
 .designer-text p { max-width: 44em; }
 .shot figcaption { padding: 10px 14px; font-size: 14px; color: #b6babc; background: #121517; }
 .steps-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }

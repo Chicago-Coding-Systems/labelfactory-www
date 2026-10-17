@@ -309,7 +309,8 @@ h3 { font-size: 19px; font-weight: 750; font-stretch: 110%; line-height: 1.25; }
 .shot a[data-lightbox] { cursor: zoom-in; }
 
 /* lightbox for screenshots */
-.lightbox { padding: 0; border: 0; background: transparent; max-width: 96vw; max-height: 94vh; overflow: visible; }
+.lightbox { position: fixed; inset: 0; margin: auto; padding: 0; border: 0; background: transparent; width: fit-content; height: fit-content; max-width: 96vw; max-height: 94vh; overflow: visible; }
+.lightbox:not([open]) { display: none; }   /* WebKit (Safari, Chrome on iPhone) otherwise keeps room for it below the footer */
 .lightbox::backdrop { background: rgb(0 1 4 / .86); }
 .lightbox img { display: block; max-width: 96vw; max-height: 94vh; width: auto; height: auto; border-radius: 8px; box-shadow: 0 20px 60px rgb(0 0 0 / .6); cursor: zoom-out; }
 .lightbox-close {

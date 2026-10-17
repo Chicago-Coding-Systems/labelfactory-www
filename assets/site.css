@@ -214,7 +214,8 @@ h3 { font-size: 19px; font-weight: 750; font-stretch: 110%; line-height: 1.25; }
 }
 .flow-hub span { max-width: 6em; }
 @media (max-width: 560px) {
-  .flow { grid-template-columns: 1fr; gap: 16px; justify-items: start; }
+  .flow { grid-template-columns: 1fr; gap: 16px; justify-items: center; }
+  .flow ul { width: max-content; }
   .flow::before {
     left: 50%; right: auto; top: -12px; bottom: -12px; width: 150px; height: auto; transform: translateX(-50%);
     clip-path: polygon(18% 0, 82% 0, 82% calc(100% - 72px), 100% calc(100% - 72px), 50% 100%, 0 calc(100% - 72px), 18% calc(100% - 72px));

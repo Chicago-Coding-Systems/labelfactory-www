@@ -298,7 +298,7 @@ h3 { font-size: 19px; font-weight: 750; font-stretch: 110%; line-height: 1.25; }
 .arch-note { margin-top: 28px; color: var(--ink-2); max-width: 44em; }
 @media (max-width: 900px) {
   .arch { grid-template-columns: 1fr; gap: 0; }
-  .arch-link { width: 2px; height: 56px; justify-self: start; margin-left: 24px; }
+  .arch-link { width: 2px; height: 56px; justify-self: center; }
   .arch-link::after { right: auto; top: auto; bottom: -1px; left: -5px; border: 6px solid transparent; border-top: 8px solid var(--steel); border-bottom: 0; }
   .arch-link::before { left: -5px; top: -1px; border: 6px solid transparent; border-bottom: 8px solid var(--steel); border-top: 0; }
   .arch-link span { left: 18px; bottom: auto; top: 50%; transform: translateY(-50%); width: max-content; text-align: left; }

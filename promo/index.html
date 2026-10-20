@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Label Factory SLAM promo</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+/* Label Factory SLAM, 25 s promo. 1920x1080 stage, driven by render(t) below.
+   Brand: Code Red #D91A21, Ink #000104, Steel #777C7E, Paper #F2F3F3. Archivo variable width. */
+@font-face {
+  font-family: "LF Archivo";
+  src: url("../assets/archivo-latin-wdth.woff2") format("woff2");
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+}
+:root { --red:#D91A21; --ink:#000104; --steel:#777C7E; --paper:#F2F3F3; --ink2:#121517; }
+html, body { margin:0; height:100%; background:#000; overflow:hidden; }
+body { display:grid; place-items:center; font-family:"LF Archivo", "Helvetica Neue", Arial, sans-serif; }
+#frame { width:1920px; height:1080px; position:relative; overflow:hidden; background:var(--ink); transform-origin:center; flex:none; }
+#stage { position:absolute; inset:-40px; }
+.scene { position:absolute; inset:0; display:none; }
+.scene.bg-ink { background:var(--ink); }
+.scene.bg-paper { background:var(--paper); }
+.scene.bg-red { background:var(--red); }
+.grid { position:absolute; inset:0; opacity:.07;
+  background-image:linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px);
+  background-size:80px 80px; }
+.bg-paper .grid { background-image:linear-gradient(#000104 1px, transparent 1px), linear-gradient(90deg, #000104 1px, transparent 1px); opacity:.06; }
+.a { position:absolute; opacity:0; white-space:nowrap; will-change:transform, opacity, filter; }
+.x { font-weight:900; font-stretch:125%; text-transform:uppercase; letter-spacing:-.02em; line-height:.86; color:#fff; }
+.bg-paper .x { color:var(--ink); }
+.red { color:var(--red) !important; }
+.ink { color:var(--ink) !important; }
+.sub { font-weight:500; font-stretch:100%; color:#b6babc; font-size:34px; letter-spacing:0; }
+.bg-paper .sub { color:#3f4446; }
+.chip { font-weight:800; font-stretch:112%; text-transform:uppercase; font-size:30px; letter-spacing:.01em;
+  color:#fff; background:#1c2023; border:3px solid #34393c; padding:30px 20px; border-radius:14px; width:400px; box-sizing:border-box; text-align:center; }
+.chip.hot { background:var(--red); border-color:var(--red); }
+.bg-paper .chip { background:#fff; color:var(--ink); border-color:var(--ink); }
+.bar { background:var(--red); height:18px; }
+#flash { position:absolute; inset:0; background:#fff; opacity:0; pointer-events:none; mix-blend-mode:normal; }
+.shot { width:1150px; border-radius:14px; box-shadow:0 40px 90px -30px rgb(0 0 0 / .9); border:4px solid #fff; display:block; }
+.belt { position:absolute; left:0; right:0; top:860px; height:70px; background:#24282a;
+  background-image:repeating-linear-gradient(90deg, #34393c 0 34px, #1a1d1f 34px 40px); border-top:6px solid #777c7e; }
+.box { width:440px; height:330px; background:#b98a5c; border-radius:6px; box-shadow:inset 0 -14px 0 rgb(0 0 0 / .12); }
+.box::before { content:""; position:absolute; left:50%; top:0; width:70px; height:100%; transform:translateX(-50%); background:rgb(255 255 255 / .14); }
+.lbl { width:250px; background:#fff; border-radius:4px; padding:16px 18px 12px; box-shadow:0 6px 0 rgb(0 0 0 / .15); font-stretch:75%; color:var(--ink); }
+.lbl b { display:block; font-size:24px; font-weight:800; text-transform:uppercase; }
+.lbl i { display:block; font-style:normal; font-size:18px; color:#3f4446; margin:2px 0 8px; }
+.bc { height:62px; background:repeating-linear-gradient(90deg, #000104 0 3px, #fff 3px 5px, #000104 5px 6px, #fff 6px 10px, #000104 10px 14px, #fff 14px 16px); }
+.stamp { font-weight:900; font-stretch:125%; text-transform:uppercase; font-size:76px; padding:14px 34px; border:10px solid currentColor; border-radius:16px; }
+.ok { color:#fff; background:#000104; }
+.bad { color:#fff; background:var(--red); border-color:#fff; }
+</style>
+</head>
+<body>
+<div id="frame"><div id="stage">
+
+  <!-- 1. Hook -->
+  <section class="scene bg-ink" id="s-hook">
+    <div class="grid"></div>
+    <div class="a x" id="h1" data-at="160 380" data-anchor="l"  style="font-size:190px">Every box.</div>
+    <div class="a x" id="h2" data-at="160 600" data-anchor="l"  style="font-size:150px">The right</div>
+    <div class="a x red" id="h3" data-at="160 790" data-anchor="l" style="font-size:230px">label.</div>
+  </section>
+
+  <!-- 2. S L A M -->
+  <section class="scene bg-ink" id="s-slam">
+    <div class="grid"></div>
+    <div class="a x" id="L0" data-at="320 420" style="font-size:330px">S</div>
+    <div class="a x" id="L1" data-at="760 420" style="font-size:330px">L</div>
+    <div class="a x" id="L2" data-at="1200 420" style="font-size:330px">A</div>
+    <div class="a x" id="L3" data-at="1640 420" style="font-size:330px">M</div>
+    <div class="a bar" id="B0" data-at="320 690" style="width:340px"></div>
+    <div class="a bar" id="B1" data-at="760 690" style="width:340px"></div>
+    <div class="a bar" id="B2" data-at="1200 690" style="width:340px"></div>
+    <div class="a bar" id="B3" data-at="1640 690" style="width:340px"></div>
+    <div class="a x" id="W0" data-at="320 770" style="font-size:66px">Scan</div>
+    <div class="a x" id="W1" data-at="760 770" style="font-size:66px">Label</div>
+    <div class="a x" id="W2" data-at="1200 770" style="font-size:66px">Apply</div>
+    <div class="a x" id="W3" data-at="1640 770" style="font-size:66px">Manifest</div>
+    <div class="a sub" id="D0" data-at="320 850" style="text-align:center;white-space:normal;width:380px">Every box read as it passes</div>
+    <div class="a sub" id="D1" data-at="760 850" style="text-align:center;white-space:normal;width:380px">Order data from your WMS or ERP</div>
+    <div class="a sub" id="D2" data-at="1200 850" style="text-align:center;white-space:normal;width:380px">Printed for the box just read</div>
+    <div class="a sub" id="D3" data-at="1640 850" style="text-align:center;white-space:normal;width:380px">Checked, recorded, shipped</div>
+  </section>
+
+  <!-- 3. Lockup -->
+  <section class="scene bg-paper" id="s-lock">
+    <div class="grid"></div>
+    <div class="a" id="logo1" data-at="480 540"><svg width="300" height="300" viewBox="0 0 64 64"><use href="#lf-logo"/></svg></div>
+    <div class="a x" id="lf1" data-at="680 430" data-anchor="l" style="font-size:96px">Label Factory</div>
+    <div class="a x red" id="slam1" data-at="672 610" data-anchor="l" style="font-size:300px">SLAM</div>
+    <div class="a sub" id="tag1" data-at="960 830" style="font-size:44px;font-weight:600">Scan, label, apply, manifest.</div>
+  </section>
+
+  <!-- 4. Line designer -->
+  <section class="scene bg-ink" id="s-design">
+    <div class="grid"></div>
+    <div class="a" id="shot" data-at="1260 650"><img class="shot" src="../assets/slam-line.jpg" alt=""></div>
+    <div class="a x" id="draw1" data-at="120 150" data-anchor="l" style="font-size:120px">Draw the line</div>
+    <div class="a x red" id="draw2" data-at="120 265" data-anchor="l" style="font-size:84px">the way it's built.</div>
+    <div class="a chip" id="dc0" data-at="330 560" style="font-size:26px">Belts and zones to scale</div>
+    <div class="a chip" id="dc1" data-at="330 700" style="font-size:26px">Devices where they sit</div>
+    <div class="a chip hot" id="dc2" data-at="330 840" style="font-size:26px">Drafts until live</div>
+  </section>
+
+  <!-- 5. Agents -->
+  <section class="scene bg-ink" id="s-agents">
+    <div class="grid"></div>
+    <div class="a x" id="ag1" data-at="1000 230" style="font-size:130px">Agents on the line</div>
+    <div class="a sub" id="ag2" data-at="1000 360">On PCs along the conveyor, talking to your devices</div>
+    <div class="a chip" id="c0" data-at="300 560">Barcode scanners</div>
+    <div class="a chip" id="c1" data-at="740 560">Print and apply</div>
+    <div class="a chip" id="c2" data-at="1180 560">Verify scanners</div>
+    <div class="a chip" id="c3" data-at="1620 560">Photo-eyes</div>
+    <div class="a chip" id="c4" data-at="300 720">Pushers</div>
+    <div class="a chip" id="c5" data-at="740 720">Stack lights</div>
+    <div class="a chip" id="c6" data-at="1180 720">Scales</div>
+    <div class="a chip hot" id="c7" data-at="1620 720">OPC UA servers</div>
+  </section>
+
+  <!-- 6. Conveyor: verify and reject -->
+  <section class="scene bg-ink" id="s-belt">
+    <div class="grid"></div>
+    <div class="belt" id="belt"></div>
+    <div class="a box" id="box1" data-at="1000 695"></div>
+    <div class="a lbl" id="lbl1" data-at="1000 695"><b>Order 58213</b><i>Ship to dock 4</i><div class="bc"></div></div>
+    <div class="a stamp ok" id="ok1" data-at="1000 420">Match</div>
+    <div class="a x" id="ship1" data-at="960 200" style="font-size:100px">Verified. Shipped.</div>
+    <div class="a box" id="box2" data-at="1000 695"></div>
+    <div class="a lbl" id="lbl2" data-at="1000 695"><b>Order 58214</b><i>Ship to dock 2</i><div class="bc"></div></div>
+    <div class="a stamp bad" id="bad2" data-at="1000 420">Mismatch</div>
+    <div class="a x red" id="rej2" data-at="960 200" style="font-size:120px">Reject lane.</div>
+  </section>
+
+  <!-- 7. At your plant -->
+  <section class="scene bg-red" id="s-plant">
+    <div class="a x" id="pl1" data-at="960 450" style="font-size:118px">Runs at your plant.</div>
+    <div class="a x ink" id="pl2" data-at="960 630" style="font-size:54px;font-stretch:110%">Nothing on the line needs the internet.</div>
+  </section>
+
+  <!-- 8. End card -->
+  <section class="scene bg-ink" id="s-end">
+    <div class="grid"></div>
+    <div class="a" id="logo2" data-at="960 360"><svg width="220" height="220" viewBox="0 0 64 64"><use href="#lf-logo"/></svg></div>
+    <div class="a x" id="end1" data-at="960 590" style="font-size:110px">Label Factory <span class="red">SLAM</span></div>
+    <div class="a sub" id="end2" data-at="960 720" style="font-size:52px;color:#fff;font-weight:700">labelfactory.app/slam</div>
+    <div class="a sub" id="end3" data-at="960 820" style="font-size:34px">Chicago Coding Systems</div>
+  </section>
+
+</div><div id="flash"></div></div>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <g id="lf-logo">
+      <rect width="64" height="64" rx="14" fill="#D91A21"/>
+      <path d="M12 26 L25.33 15 L25.33 26 L38.67 15 L38.67 26 L52 15 L52 47 Q52 51 48 51 L16 51 Q12 51 12 47 Z" fill="#fff"/>
+      <g fill="#000104"><rect x="16.1" y="31" width="2.6" height="15"/><rect x="20.2" y="31" width="1.3" height="15"/><rect x="23" y="31" width="3.4" height="15"/><rect x="27.9" y="31" width="1.3" height="15"/><rect x="30.7" y="31" width="2.6" height="15"/><rect x="34.8" y="31" width="1.3" height="15"/><rect x="37.6" y="31" width="3.4" height="15"/><rect x="42.5" y="31" width="1.3" height="15"/><rect x="45.3" y="31" width="2.6" height="15"/></g>
+    </g>
+  </defs>
+</svg>
+
+<script>
+/* ---------- Timeline. Edit times (seconds) here; everything else follows. ---------- */
+const DURATION = 25;
+const SCENES = [            // [id, start, end] — hard cuts between them
+  ["s-hook",    0.0,  2.4],
+  ["s-slam",    2.4,  7.6],
+  ["s-lock",    7.6,  10.0],
+  ["s-design",  10.0, 13.6],
+  ["s-agents",  13.6, 16.6],
+  ["s-belt",    16.6, 20.6],
+  ["s-plant",   20.6, 22.4],
+  ["s-end",     22.4, 25.0],
+];
+// [selector, time, enter, options]. enter: slam | stamp | pop | up | left | right | drop
+// options.kick = camera shake strength on impact, options.from = start scale for slam
+const CUES = [
+  ["#h1", 0.15, "slam", {kick: 22}],
+  ["#h2", 0.85, "slam", {kick: 14}],
+  ["#h3", 1.35, "slam", {kick: 34, flash: .5}],
+
+  ["#L0", 2.50, "slam", {kick: 36, from: 4}], ["#B0", 2.62, "left"], ["#W0", 2.68, "slam", {kick: 8}], ["#D0", 2.90, "up"],
+  ["#L1", 3.70, "slam", {kick: 36, from: 4}], ["#B1", 3.82, "left"], ["#W1", 3.88, "slam", {kick: 8}], ["#D1", 4.10, "up"],
+  ["#L2", 4.90, "slam", {kick: 36, from: 4}], ["#B2", 5.02, "left"], ["#W2", 5.08, "slam", {kick: 8}], ["#D2", 5.30, "up"],
+  ["#L3", 6.10, "slam", {kick: 44, from: 4, flash: .45}], ["#B3", 6.22, "left"], ["#W3", 6.28, "slam", {kick: 8}], ["#D3", 6.50, "up"],
+
+  ["#logo1", 7.70, "stamp", {kick: 18}],
+  ["#lf1",   8.00, "right"],
+  ["#slam1", 8.25, "slam", {kick: 50, from: 3.2, flash: .55}],
+  ["#tag1",  8.75, "up"],
+
+  ["#draw1", 10.10, "slam", {kick: 16}],
+  ["#draw2", 10.40, "slam", {kick: 10}],
+  ["#shot",  10.70, "slam", {kick: 26, from: 1.8, rot: -3}],
+  ["#dc0",   11.50, "pop", {kick: 6}],
+  ["#dc1",   11.85, "pop", {kick: 6}],
+  ["#dc2",   12.20, "pop", {kick: 10}],
+
+  ["#ag1", 13.70, "slam", {kick: 26}],
+  ["#ag2", 14.05, "up"],
+  ["#c0", 14.30, "pop", {kick: 7}], ["#c1", 14.48, "pop", {kick: 7}], ["#c2", 14.66, "pop", {kick: 7}], ["#c3", 14.84, "pop", {kick: 7}],
+  ["#c4", 15.02, "pop", {kick: 7}], ["#c5", 15.20, "pop", {kick: 7}], ["#c6", 15.38, "pop", {kick: 7}],
+  ["#c7", 15.62, "slam", {kick: 30, from: 2.4, flash: .35}],
+
+  ["#lbl1",  17.20, "slam", {kick: 20, from: 3}],
+  ["#ok1",   17.65, "stamp", {kick: 22, rot: -6}],
+  ["#ship1", 17.80, "slam", {kick: 12}],
+  ["#lbl2",  19.00, "slam", {kick: 20, from: 3}],
+  ["#bad2",  19.40, "stamp", {kick: 30, rot: 5, flash: .3}],
+  ["#rej2",  19.55, "slam", {kick: 14}],
+
+  ["#pl1", 20.70, "slam", {kick: 34}],
+  ["#pl2", 21.25, "slam", {kick: 10, from: 1.6}],
+
+  ["#logo2", 22.50, "stamp", {kick: 20}],
+  ["#end1",  22.85, "slam", {kick: 30, from: 2.6, flash: .35}],
+  ["#end2",  23.35, "up"],
+  ["#end3",  23.60, "up"],
+];
+// Anything that moves continuously rather than slamming once.
+const MOTION = {
+  // SLAM scene: earlier letters dim when the next one lands.
+  "#L0": t => ({ dim: t >= 3.70 }), "#L1": t => ({ dim: t >= 4.90 }), "#L2": t => ({ dim: t >= 6.10 }),
+  "#shot": t => ({ scale: 1 + Math.max(0, t - 10.85) * 0.03 }),
+  // Boxes ride the belt: in from the left, stop under the printer, then leave.
+  "#box1": t => box(t, 16.6, 17.05, 18.1, "right"),
+  "#lbl1": t => box(t, 16.6, 17.05, 18.1, "right"),
+  "#ok1":  t => ({ dx: t > 18.1 ? (t - 18.1) * 3000 : 0, hide: t >= 18.3 }),
+  "#ship1": t => ({ hide: t >= 18.3 }),
+  "#box2": t => box(t, 18.3, 18.75, 19.75, "down"),
+  "#lbl2": t => box(t, 18.3, 18.75, 19.75, "down"),
+};
+function box(t, tIn, tStop, tOut, exit) {
+  if (t < tIn) return { hide: true };
+  if (t < tStop) { const p = ease((t - tIn) / (tStop - tIn)); return { dx: -1400 * (1 - p), show: true }; }
+  if (t < tOut) return { show: true };
+  const q = (t - tOut);
+  return exit === "right" ? { dx: q * 3000, show: true } : { dy: q * q * 5000, rot: q * 40, show: true };
+}
+
+/* ---------- Engine ---------- */
+const ease = p => 1 - Math.pow(1 - Math.min(Math.max(p, 0), 1), 3);
+const clamp = p => Math.min(Math.max(p, 0), 1);
+const ENTER = {
+  slam:  { dur: .24, hit: .62, f(p, o) { const s0 = o.from || 3; let s;
+           if (p < .62) s = s0 + (0.9 - s0) * Math.pow(p / .62, 2.2); else s = .9 + .1 * ease((p - .62) / .38);
+           return { s, o: clamp(p * 5), blur: p < .62 ? (1 - p / .62) * 14 : 0, r: (o.rot || 0) * (p < .62 ? 2 : 1) }; } },
+  stamp: { dur: .2, hit: .6, f(p, o) { const s = p < .6 ? 2.2 - 1.3 * (p / .6) : .9 + .1 * ease((p - .6) / .4);
+           return { s, o: clamp(p * 4), r: (o.rot || 0) + (1 - p) * 12 }; } },
+  pop:   { dur: .16, hit: .7, f(p) { return { s: .55 + .45 * ease(p) + Math.sin(p * Math.PI) * .08, o: clamp(p * 3) }; } },
+  up:    { dur: .35, hit: 1, f(p) { return { dy: 40 * (1 - ease(p)), o: ease(p) }; } },
+  left:  { dur: .18, hit: 1, f(p) { return { sx: ease(p), o: clamp(p * 4) }; } },
+  right: { dur: .22, hit: 1, f(p) { return { dx: -260 * (1 - ease(p)), o: ease(p) }; } },
+};
+const BLEED = 40;   // #stage overhangs the frame by this much so the shake never shows an edge
+const items = [], impacts = [], flashes = [];
+const sceneOf = el => SCENES.find(s => s[0] === el.closest(".scene").id);
+document.querySelectorAll(".a").forEach(el => {
+  const [x, y] = el.dataset.at.split(" ").map(Number);
+  el.style.left = x + BLEED + "px"; el.style.top = y + BLEED + "px";
+  items.push({ el, sel: "#" + el.id, t: null, enter: null, opt: {}, anchor: el.dataset.anchor || "c" });
+});
+for (const [sel, t, enter, opt = {}] of CUES) {
+  const el = document.querySelector(sel); if (!el) { console.warn("no cue target", sel); continue; }
+  Object.assign(items.find(i => i.el === el), { t, enter, opt });
+  const d = ENTER[enter], hit = t + d.dur * d.hit;
+  if (opt.kick) impacts.push({ t: hit, amp: opt.kick, seed: impacts.length * 1.7 });
+  if (opt.flash) flashes.push({ t: hit, a: opt.flash });
+}
+
+const stage = document.getElementById("stage"), flash = document.getElementById("flash"), belt = document.getElementById("belt");
+
+function render(t) {
+  for (const [id, a, b] of SCENES) document.getElementById(id).style.display = t >= a && t < b ? "block" : "none";
+  for (const it of items) {
+    const m = MOTION[it.sel] ? MOTION[it.sel](t) : {};
+    let st = { s: 1, o: 1, blur: 0, r: 0, dx: 0, dy: 0, sx: 1 };
+    if (it.t !== null) {
+      if (t < it.t) { it.el.style.opacity = 0; continue; }
+      Object.assign(st, ENTER[it.enter].f(clamp((t - it.t) / ENTER[it.enter].dur), it.opt));
+      if (it.opt.rot && t >= it.t + ENTER[it.enter].dur) st.r = it.opt.rot;
+    } else if (m.hide || !m.show) { it.el.style.opacity = 0; continue; }
+    if (m.hide) { it.el.style.opacity = 0; continue; }
+    st.dx += m.dx || 0; st.dy += m.dy || 0; st.r += m.rot || 0; if (m.scale) st.s *= m.scale;
+    const anchor = it.anchor === "l" ? "translate(0,-50%)" : "translate(-50%,-50%)";
+    it.el.style.transformOrigin = it.anchor === "l" ? "left center" : "center";
+    it.el.style.transform = `${anchor} translate(${st.dx}px,${st.dy}px) rotate(${st.r}deg) scale(${st.s}) scaleX(${st.sx})`;
+    it.el.style.opacity = st.o * (m.dim ? .28 : 1);
+    it.el.style.filter = st.blur ? `blur(${st.blur.toFixed(1)}px)` : "none";
+  }
+  // camera shake: decaying jitter after each impact
+  let sx = 0, sy = 0, sr = 0;
+  for (const k of impacts) { const d = t - k.t; if (d < 0 || d > .45) continue;
+    const e = k.amp * Math.exp(-d * 11);
+    sx += e * Math.sin(d * 95 + k.seed); sy += e * Math.cos(d * 83 + k.seed * 2); sr += e * .012 * Math.sin(d * 70 + k.seed); }
+  stage.style.transform = `translate(${sx}px,${sy}px) rotate(${sr}deg)`;
+  let fa = 0; for (const f of flashes) { const d = t - f.t; if (d >= 0 && d < .14) fa = Math.max(fa, f.a * (1 - d / .14)); }
+  flash.style.opacity = fa;
+  belt.style.backgroundPosition = `${(t * 520) % 40}px 0`;
+}
+
+/* ---------- Playback ---------- */
+window.DURATION = DURATION;
+window.renderAt = t => render(t);              // used by render.mjs
+const frame = document.getElementById("frame");
+function fit() { const k = Math.min(innerWidth / 1920, innerHeight / 1080); frame.style.transform = `scale(${k})`; }
+if (new URLSearchParams(location.search).has("render")) {
+  document.body.style.display = "block"; render(0);
+} else {
+  fit(); addEventListener("resize", fit);
+  const start = performance.now();
+  const loop = now => { render(((now - start) / 1000) % DURATION); requestAnimationFrame(loop); };
+  document.fonts.ready.then(() => requestAnimationFrame(loop));
+}
+</script>
+</body>
+</html>
